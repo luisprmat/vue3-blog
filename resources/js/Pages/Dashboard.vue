@@ -1,5 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import PostsIndex from '../Components/Posts/Index.vue'
 </script>
 
 <template>
@@ -17,7 +18,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
         <div
           class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"
         >
-          <div class="p-6 text-gray-900 dark:text-gray-100">Vue works!</div>
+          <div class="p-6 text-gray-900 dark:text-gray-100">
+            <PostsIndex />
+          </div>
         </div>
       </div>
     </div>
