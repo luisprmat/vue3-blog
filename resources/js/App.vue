@@ -1,3 +1,1 @@
-<template>
-    Vue works!
-</template>
+<template>Vue works!</template>
