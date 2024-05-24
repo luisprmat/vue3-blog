@@ -12,6 +12,7 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
         <!-- Scripts -->
+        @vite(['resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div id="app"></div>
