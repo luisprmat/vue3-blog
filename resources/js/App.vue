@@ -1,3 +1,7 @@
+<script setup>
+import Dashboard from '@/Pages/Dashboard.vue'
+</script>
+
 <template>
-  <h1 class="text-3xl font-bold underline">Vue works!</h1>
+  <Dashboard />
 </template>
