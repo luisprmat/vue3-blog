@@ -6,7 +6,7 @@ export default function usePosts() {
   const getPosts = async () => {
     try {
       const response = await axios.get('/api/posts')
-      posts.value = response.data
+      posts.value = response.data.data
     } catch (error) {
       console.error(error)
     }
