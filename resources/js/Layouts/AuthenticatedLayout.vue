@@ -28,7 +28,9 @@ const showingNavigationDropdown = ref(false)
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <NavLink href="/" :active="true"> Dashboard </NavLink>
+                <NavLink href="/" :active="true">
+                  {{ $t('Dashboard') }}
+                </NavLink>
               </div>
             </div>
 
@@ -80,7 +82,7 @@ const showingNavigationDropdown = ref(false)
         >
           <div class="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink href="/" :active="true">
-              Dashboard
+              {{ $t('Dashboard') }}
             </ResponsiveNavLink>
           </div>
 

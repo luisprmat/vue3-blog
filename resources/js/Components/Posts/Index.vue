@@ -32,19 +32,19 @@ const fetchPosts = async () => {
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span
                 class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                >Title</span
+                >{{ $t('Title') }}</span
               >
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span
                 class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                >Content</span
+                >{{ $t('Content') }}</span
               >
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span
                 class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                >Created at</span
+                >{{ $t('Created at') }}</span
               >
             </th>
           </tr>
