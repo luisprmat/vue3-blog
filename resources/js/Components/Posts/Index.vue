@@ -1,18 +1,10 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
+import usePosts from '@/composables/posts'
 
-const posts = ref([])
+const { posts, getPosts } = usePosts()
 
-onMounted(() => fetchPosts())
-
-const fetchPosts = async () => {
-  try {
-    const response = await axios.get('/api/posts')
-    posts.value = response.data
-  } catch (error) {
-    console.error(error)
-  }
-}
+onMounted(getPosts)
 </script>
 
 <template>
