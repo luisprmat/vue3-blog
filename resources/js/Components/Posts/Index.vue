@@ -31,6 +31,12 @@ onMounted(getPosts)
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span
                 class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
+                >{{ $t('Category') }}</span
+              >
+            </th>
+            <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
+              <span
+                class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
                 >{{ $t('Content') }}</span
               >
             </th>
@@ -55,6 +61,11 @@ onMounted(getPosts)
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
               {{ post.title }}
+            </td>
+            <td
+              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
+            >
+              {{ post.category }}
             </td>
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
