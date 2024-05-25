@@ -1,3 +1,20 @@
+<script setup>
+import { onMounted, ref } from 'vue'
+
+const posts = ref([])
+
+onMounted(() => fetchPosts())
+
+const fetchPosts = async () => {
+  try {
+    const response = await axios.get('/api/posts')
+    posts.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+</script>
+
 <template>
   <div class="overflow-hidden overflow-x-auto">
     <div class="min-w-full align-middle">
@@ -35,54 +52,26 @@
         <tbody
           class="divide-y divide-solid divide-gray-200 dark:divide-gray-600"
         >
-          <tr>
+          <tr v-for="post in posts">
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
-              1
+              {{ post.id }}
             </td>
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
-              A
+              {{ post.title }}
             </td>
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{ post.content }}
             </td>
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
-              2022-01-01 13:43:47
-            </td>
-          </tr>
-          <tr>
-            <td
-              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
-            >
-              2
-            </td>
-            <td
-              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
-            >
-              B
-            </td>
-            <td
-              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </td>
-            <td
-              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
-            >
-              2022-01-02 14:43:47
+              {{ post.created_at }}
             </td>
           </tr>
         </tbody>
