@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,9 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
+        $category1 = Category::create(['name' => 'Teoremas']);
+        $category2 = Category::create(['name' => 'Estadística']);
+
         Post::create([
             'title' => 'Los axiomas de Peano',
             'content' => <<<'CONTENT'
@@ -26,6 +30,7 @@ class PostSeeder extends Seeder
 
                 Este último _axioma_ es el principio de *inducción matemática*.
                 CONTENT,
+            'category_id' => $category1->id,
         ]);
 
         Post::create([
@@ -35,6 +40,19 @@ class PostSeeder extends Seeder
 
                 Demoró más de trescientos años en ser demostrado, dando origen a diversas teorías matemáticas.
                 CONTENT,
+            'category_id' => $category1->id,
+        ]);
+
+        Post::create([
+            'title' => 'Teorema de pitágoras',
+            'content' => <<<'CONTENT'
+                En todo triángulo rectángulo se cumple que si $a$ y $b$ son los catetos y $h$ la hipotenusa, entonces
+
+                $$h=\sqrt{a^2+b^2}$$
+
+                Esta afirmación es de doble sentido, es decir si se cumple la expresión anterior entonces el triángulo necesariamente es rectángulo.
+                CONTENT,
+            'category_id' => $category1->id,
         ]);
 
         Post::create([
@@ -60,6 +78,33 @@ class PostSeeder extends Seeder
                 | 5    | 7    | 1    | 9    |
                 | 6    | 8    | 1    | 10   |
                 CONTENT,
+            'category_id' => $category2->id,
+        ]);
+
+        Post::create([
+            'title' => '¿Cómo calcular la media aritmética en una tabla de frecuencias?',
+            'content' => <<<'CONTENT'
+                Si tengo una tabla como:
+
+                | i    | x_i  | f_i    | x_i*f_i | F_i  |
+                | :--: | :--: | :----: | :-----: |:--:  |
+                | 1    | 2    | 4      | 8       | 4    |
+                | 2    | 3    | 2      | 6       | 6    |
+                | 3    | 4    | 1      | 4       | 7    |
+                | 4    | 5    | 1      | 5       | 8    |
+                | 5    | 7    | 1      | 7       | 9    |
+                | 6    | 8    | 1      | 8       | 10   |
+                |      |      | **10** | **38**  |      |
+
+                entonces la **media aritmética** $\overline x$ se calcula como
+
+                $$\overline x = \frac{\sum_{i=1}^nf_i\cdot x_i}{\sum_{i=1}^nf_i}$$
+
+                es decir en este caso
+
+                $$\overline x = \frac{38}{10} = 3.8$$
+                CONTENT,
+            'category_id' => $category2->id,
         ]);
     }
 }
