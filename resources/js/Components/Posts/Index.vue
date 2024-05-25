@@ -1,15 +1,37 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import usePosts from '@/composables/posts'
+import useCategories from '@/composables/categories'
+
 import { TailwindPagination } from 'laravel-vue-pagination'
 
+const selectedCategory = ref('')
 const { posts, getPosts } = usePosts()
+const { categories, getCategories } = useCategories()
 
-onMounted(getPosts)
+onMounted(() => {
+  getPosts()
+  getCategories()
+})
 </script>
 
 <template>
-  <div class="overflow-hidden overflow-x-auto">
+  <div class="overflow-hidden overflow-x-auto p-1">
+    <div class="mb-4">
+      <select
+        v-model="selectedCategory"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:w-1/4 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
+      >
+        <option value="" selected>-- {{ $t('Filter by category') }} --</option>
+        <option
+          v-for="category in categories"
+          :value="category.id"
+          :key="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
     <div class="min-w-full align-middle">
       <table
         class="min-w-full divide-y divide-gray-200 border dark:divide-gray-600 dark:border-gray-600"
