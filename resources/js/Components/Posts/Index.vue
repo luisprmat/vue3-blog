@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import usePosts from '@/composables/posts'
+import { TailwindPagination } from 'laravel-vue-pagination'
 
 const { posts, getPosts } = usePosts()
 
@@ -44,7 +45,7 @@ onMounted(getPosts)
         <tbody
           class="divide-y divide-solid divide-gray-200 dark:divide-gray-600"
         >
-          <tr v-for="post in posts">
+          <tr v-for="post in posts.data">
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
@@ -68,6 +69,14 @@ onMounted(getPosts)
           </tr>
         </tbody>
       </table>
+
+      <TailwindPagination
+        :data="posts"
+        @pagination-change-page="getPosts"
+        class="mt-4"
+        :item-classes="['dark:bg-gray-800', 'dark:border-gray-600']"
+        :active-classes="['bg-blue-50', 'dark:bg-gray-700']"
+      />
     </div>
   </div>
 </template>
