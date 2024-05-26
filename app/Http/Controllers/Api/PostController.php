@@ -16,6 +16,19 @@ class PostController extends Controller
             ->when(request('category'), function (Builder $query) {
                 $query->where('category_id', request('category'));
             })
+            ->when(request('sort'), function (Builder $query) {
+                $sortField = request('sort', 'created_at');
+
+                $orderDirection = str($sortField)->startsWith('-') ? 'desc' : 'asc';
+                $orderColumn = ltrim($sortField, '-');
+                if (! in_array($orderColumn, ['id', 'title', 'created_at'])) {
+                    $orderColumn = 'created_at';
+                }
+
+                $query->orderBy($orderColumn, $orderDirection);
+            }, function (Builder $query) {
+                $query->latest();
+            })
             ->paginate(10);
 
         return PostResource::collection($posts);
