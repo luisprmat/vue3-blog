@@ -1,32 +1,16 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import usePosts from '@/composables/posts'
 import useCategories from '@/composables/categories'
+import ColumnSort from '@/Components/ColumnSort.vue'
 
 import { TailwindPagination } from 'laravel-vue-pagination'
 
 const selectedCategory = ref('')
-const orderColumn = ref('created_at')
-const orderDirection = ref('desc')
-
-const sort = computed(() =>
-  orderDirection.value === 'asc' ? orderColumn.value : '-' + orderColumn.value
-)
+const sort = ref('-created_at')
 
 const { posts, getPosts } = usePosts()
 const { categories, getCategories } = useCategories()
-
-const updateOrdering = (column) => {
-  if (orderColumn.value === column) {
-    orderDirection.value = orderDirection.value === 'asc' ? 'desc' : 'asc'
-  } else {
-    orderDirection.value = 'asc'
-  }
-
-  orderColumn.value = column
-
-  getPosts(1, selectedCategory.value, sort.value)
-}
 
 onMounted(() => {
   getPosts()
@@ -35,6 +19,10 @@ onMounted(() => {
 
 watch(selectedCategory, (current, previous) => {
   getPosts(1, current, sort.value)
+})
+
+watch(sort, (current, previous) => {
+  getPosts(1, selectedCategory.value, current)
 })
 </script>
 
@@ -62,82 +50,20 @@ watch(selectedCategory, (current, previous) => {
         <thead>
           <tr>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
-              <div
-                class="flex cursor-pointer flex-row items-center justify-between text-sm font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                @click="updateOrdering('id')"
-              >
-                <div
-                  :class="{
-                    'font-bold text-blue-500 dark:text-blue-400':
-                      orderColumn === 'id',
-                  }"
-                >
-                  ID
-                </div>
-                <div class="select-none">
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'asc' && orderColumn === 'id',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'asc' &&
-                        orderColumn === 'id',
-                    }"
-                    >&uarr;</span
-                  >
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'desc' && orderColumn === 'id',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'desc' &&
-                        orderColumn === 'id',
-                    }"
-                    >&darr;</span
-                  >
-                </div>
-              </div>
+              <ColumnSort
+                column="id"
+                v-model="sort"
+                active-classes="font-bold text-blue-500 dark:text-blue-400"
+                >ID
+              </ColumnSort>
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
-              <div
-                class="flex cursor-pointer flex-row items-center justify-between text-sm font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                @click="updateOrdering('title')"
-              >
-                <div
-                  :class="{
-                    'font-bold text-blue-500 dark:text-blue-400':
-                      orderColumn === 'title',
-                  }"
-                >
-                  {{ $t('Title') }}
-                </div>
-                <div class="select-none">
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'asc' && orderColumn === 'title',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'asc' &&
-                        orderColumn === 'title',
-                    }"
-                    >&uarr;</span
-                  >
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'desc' && orderColumn === 'title',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'desc' &&
-                        orderColumn === 'title',
-                    }"
-                    >&darr;</span
-                  >
-                </div>
-              </div>
+              <ColumnSort
+                column="title"
+                v-model="sort"
+                active-classes="font-bold text-blue-500 dark:text-blue-400"
+                >{{ $t('Title') }}
+              </ColumnSort>
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span
@@ -152,45 +78,12 @@ watch(selectedCategory, (current, previous) => {
               >
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
-              <div
-                class="flex cursor-pointer flex-row items-center justify-between text-sm font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                @click="updateOrdering('created_at')"
-              >
-                <div
-                  :class="{
-                    'font-bold text-blue-500 dark:text-blue-400':
-                      orderColumn === 'created_at',
-                  }"
-                >
-                  {{ $t('Created at') }}
-                </div>
-                <div class="select-none">
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'asc' &&
-                        orderColumn === 'created_at',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'asc' &&
-                        orderColumn === 'created_at',
-                    }"
-                    >&uarr;</span
-                  >
-                  <span
-                    :class="{
-                      'text-blue-500 dark:text-blue-400':
-                        orderDirection === 'desc' &&
-                        orderColumn === 'created_at',
-                      hidden:
-                        orderDirection !== '' &&
-                        orderDirection !== 'desc' &&
-                        orderColumn === 'created_at',
-                    }"
-                    >&darr;</span
-                  >
-                </div>
-              </div>
+              <ColumnSort
+                column="created_at"
+                v-model="sort"
+                active-classes="font-bold text-blue-500 dark:text-blue-400"
+                >{{ $t('Created at') }}
+              </ColumnSort>
             </th>
           </tr>
         </thead>
