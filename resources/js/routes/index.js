@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import PostsIndex from '@/Components/Posts/Index.vue'
-import PostsCreate from '@/Components/Posts/Create.vue'
 
 const routes = [
   {
@@ -12,7 +11,7 @@ const routes = [
   {
     path: '/posts/create',
     name: 'posts.create',
-    component: PostsCreate,
+    component: () => import('@/Components/Posts/Create.vue'),
   },
 ]
 
