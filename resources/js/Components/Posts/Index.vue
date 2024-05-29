@@ -66,10 +66,13 @@ watch(sort, (current, previous) => {
               </ColumnSort>
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
-              <span
-                class="text-sm font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
-                >{{ $t('Category') }}</span
+              <ColumnSort
+                column="category"
+                v-model="sort"
+                active-classes="font-bold text-blue-500 dark:text-blue-400"
               >
+                {{ $t('Category') }}
+              </ColumnSort>
             </th>
             <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
               <span

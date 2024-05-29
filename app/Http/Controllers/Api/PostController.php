@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -21,11 +22,19 @@ class PostController extends Controller
 
                 $orderDirection = str($sortField)->startsWith('-') ? 'desc' : 'asc';
                 $orderColumn = ltrim($sortField, '-');
-                if (! in_array($orderColumn, ['id', 'title', 'created_at'])) {
-                    $orderColumn = 'created_at';
-                }
 
-                $query->orderBy($orderColumn, $orderDirection);
+                if ($orderColumn === 'category') {
+                    $query->orderBy(
+                        Category::select('name')->whereColumn('id', 'posts.category_id'),
+                        $orderDirection
+                    );
+                } else {
+                    if (! in_array($orderColumn, ['id', 'title', 'created_at'])) {
+                        $orderColumn = 'created_at';
+                    }
+
+                    $query->orderBy($orderColumn, $orderDirection);
+                }
             }, function (Builder $query) {
                 $query->latest();
             })
