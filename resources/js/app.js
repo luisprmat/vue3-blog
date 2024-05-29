@@ -9,8 +9,8 @@ import PostCreate from '@/Components/Posts/Create.vue'
 import PostIndex from '@/Components/Posts/Index.vue'
 
 const routes = [
-  { path: '/', component: PostIndex },
-  { path: '/posts/create', component: PostCreate },
+  { path: '/', name: 'posts.index', component: PostIndex },
+  { path: '/posts/create', name: 'posts.create', component: PostCreate },
 ]
 
 const router = createRouter({
