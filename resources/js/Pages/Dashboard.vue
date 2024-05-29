@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import PostsIndex from '../Components/Posts/Index.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import PostsIndex from '../Components/Posts/Index.vue'
           class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"
         >
           <div class="p-6 text-gray-900 dark:text-gray-100">
-            <PostsIndex />
+            <RouterView />
           </div>
         </div>
       </div>
