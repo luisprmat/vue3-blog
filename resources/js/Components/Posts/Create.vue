@@ -11,7 +11,7 @@ import SelectInput from '@/Components/SelectInput.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const { categories, getCategories } = useCategories()
-const { storePost, validationErrors } = usePosts()
+const { storePost, validationErrors, isLoading } = usePosts()
 
 const post = reactive({
   title: '',
@@ -71,7 +71,14 @@ onMounted(getCategories)
 
     <!-- Buttons -->
     <div class="mt-4">
-      <PrimaryButton>{{ $t('Save') }}</PrimaryButton>
+      <PrimaryButton :disabled="isLoading">
+        <span
+          v-show="isLoading"
+          class="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-b-2 border-l-2 border-r-2 border-t-2 border-b-white border-l-blue-600 border-r-white border-t-white"
+        ></span>
+        <span v-if="isLoading">{{ $t('Processing') }}...</span>
+        <span v-else>{{ $t('Save') }}</span>
+      </PrimaryButton>
     </div>
   </form>
 </template>
