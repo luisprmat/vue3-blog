@@ -3,6 +3,7 @@ import { onMounted, reactive } from 'vue'
 import useCategories from '@/composables/categories'
 import usePosts from '@/composables/posts'
 
+import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import TextareaInput from '@/Components/TextareaInput.vue'
@@ -10,7 +11,7 @@ import SelectInput from '@/Components/SelectInput.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const { categories, getCategories } = useCategories()
-const { storePost } = usePosts()
+const { storePost, validationErrors } = usePosts()
 
 const post = reactive({
   title: '',
@@ -33,6 +34,8 @@ onMounted(getCategories)
         class="mt-1 block w-full"
         autofocus
       />
+
+      <InputError class="mt-2" :messages="validationErrors?.title" />
     </div>
 
     <!-- Content -->
@@ -44,6 +47,8 @@ onMounted(getCategories)
         id="post-content"
         class="mt-1 block w-full"
       />
+
+      <InputError class="mt-2" :messages="validationErrors?.content" />
     </div>
 
     <!-- Category -->
@@ -60,6 +65,8 @@ onMounted(getCategories)
           {{ category.name }}
         </option>
       </SelectInput>
+
+      <InputError class="mt-2" :messages="validationErrors?.category_id" />
     </div>
 
     <!-- Buttons -->

@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 export default function usePosts() {
   const posts = ref({})
   const router = useRouter()
+  const validationErrors = ref({})
 
   const getPosts = async (page = 1, category = '', sort = '') => {
     try {
@@ -24,7 +25,9 @@ export default function usePosts() {
       await axios.post('/api/posts', post)
       router.push({ name: 'posts.index' })
     } catch (error) {
-      console.error(error.response.data)
+      if (error.response?.data) {
+        validationErrors.value = error.response.data.errors
+      }
     }
   }
 
@@ -32,5 +35,6 @@ export default function usePosts() {
     posts,
     getPosts,
     storePost,
+    validationErrors,
   }
 }
