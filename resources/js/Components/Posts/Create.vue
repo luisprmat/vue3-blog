@@ -10,11 +10,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const { categories, getCategories } = useCategories()
 
+const submit = () => {
+  console.log('submitted')
+}
+
 onMounted(getCategories)
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="submit">
     <!-- Title -->
     <div>
       <InputLabel for="post-title" :value="$t('Title')" />
