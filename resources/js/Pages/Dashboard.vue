@@ -1,7 +1,18 @@
 <script setup>
+import { ref, watch } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import { trans } from 'laravel-vue-i18n'
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-import PostsIndex from '../Components/Posts/Index.vue'
-import { RouterView } from 'vue-router'
+
+const route = useRoute()
+const currentPageTitle = ref('')
+
+watch(
+  () => route.meta.title,
+  (current) => (currentPageTitle.value = trans(current)),
+  { inmediate: true }
+)
 </script>
 
 <template>
@@ -10,7 +21,7 @@ import { RouterView } from 'vue-router'
       <h2
         class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
       >
-        {{ $t('Dashboard') }}
+        {{ currentPageTitle }}
       </h2>
     </template>
 

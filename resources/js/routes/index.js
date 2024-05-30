@@ -7,11 +7,13 @@ const routes = [
     path: '/',
     name: 'posts.index',
     component: PostsIndex,
+    meta: { title: 'Posts' },
   },
   {
     path: '/posts/create',
     name: 'posts.create',
     component: () => import('@/Components/Posts/Create.vue'),
+    meta: { title: 'Add new Post' },
   },
 ]
 
