@@ -1,7 +1,9 @@
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default function usePosts() {
   const posts = ref({})
+  const router = useRouter()
 
   const getPosts = async (page = 1, category = '', sort = '') => {
     try {
@@ -17,8 +19,18 @@ export default function usePosts() {
     }
   }
 
+  const storePost = async (post) => {
+    try {
+      await axios.post('/api/posts', post)
+      router.push({ name: 'posts.index' })
+    } catch (error) {
+      console.error(error.response.data)
+    }
+  }
+
   return {
     posts,
     getPosts,
+    storePost,
   }
 }
