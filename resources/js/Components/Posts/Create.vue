@@ -1,9 +1,16 @@
 <script setup>
+import { onMounted } from 'vue'
+import useCategories from '@/composables/categories'
+
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import TextareaInput from '@/Components/TextareaInput.vue'
 import SelectInput from '@/Components/SelectInput.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
+
+const { categories, getCategories } = useCategories()
+
+onMounted(getCategories)
 </script>
 
 <template>
@@ -28,6 +35,9 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 
       <SelectInput id="post-category" class="mt-1 block w-full">
         <option value="" selected>-- {{ $t('Choose category') }} --</option>
+        <option v-for="category in categories" :value="category.id">
+          {{ category.name }}
+        </option>
       </SelectInput>
     </div>
 
