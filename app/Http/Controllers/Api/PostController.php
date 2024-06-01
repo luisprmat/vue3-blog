@@ -37,6 +37,19 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+
+            $fileinfo = [
+                'name' => $file->getClientOriginalName(),
+                'extension' => $file->getClientOriginalExtension(),
+                'mimetype' => $file->getClientMimeType(),
+                'size' => $file->getSize(),
+            ];
+
+            info($fileinfo);
+        }
+
         $post = Post::create($request->validated());
 
         return PostResource::make($post);
