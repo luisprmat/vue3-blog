@@ -17,6 +17,7 @@ const post = reactive({
   title: '',
   content: '',
   category_id: '',
+  thumbnail: '',
 })
 
 onMounted(getCategories)
@@ -67,6 +68,20 @@ onMounted(getCategories)
       </SelectInput>
 
       <InputError class="mt-2" :messages="validationErrors?.category_id" />
+    </div>
+
+    <!-- Thumbnail -->
+    <div class="mt-4">
+      <InputLabel for="thumbnail" :value="$t('Thumbnail')" />
+
+      <input
+        @change="post.thumbnail = $event.target.files[0]"
+        type="file"
+        id="thumbnail"
+        class="mt-1"
+      />
+
+      <InputError class="mt-2" :messages="validationErrors?.thumbnail" />
     </div>
 
     <!-- Buttons -->
