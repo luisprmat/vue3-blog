@@ -15,6 +15,12 @@ const routes = [
     component: () => import('@/Components/Posts/Create.vue'),
     meta: { title: 'Add new Post' },
   },
+  {
+    path: '/posts/edit/:id',
+    name: 'posts.edit',
+    component: () => import('@/Components/Posts/Edit.vue'),
+    meta: { title: 'Edit post' },
+  },
 ]
 
 export default createRouter({

@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import usePosts from '@/composables/posts'
 import useCategories from '@/composables/categories'
 import ColumnSort from '@/Components/ColumnSort.vue'
+import { RouterLink } from 'vue-router'
 
 import { TailwindPagination } from 'laravel-vue-pagination'
 
@@ -85,6 +86,12 @@ watch(sort, (current, previous) => {
                 >{{ $t('Created at') }}
               </ColumnSort>
             </th>
+            <th class="bg-gray-50 px-6 py-3 text-left dark:bg-gray-900">
+              <span
+                class="text-sm font-medium uppercase leading-4 tracking-wider text-gray-500 dark:text-gray-400"
+                >{{ $t('Actions') }}</span
+              >
+            </th>
           </tr>
         </thead>
         <tbody
@@ -115,6 +122,15 @@ watch(sort, (current, previous) => {
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
               {{ post.created_at }}
+            </td>
+            <td
+              class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
+            >
+              <RouterLink
+                :to="{ name: 'posts.edit', params: { id: post.id } }"
+                class="hover:underline"
+                >{{ $t('Edit') }}</RouterLink
+              >
             </td>
           </tr>
         </tbody>
