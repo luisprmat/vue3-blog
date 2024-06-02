@@ -116,7 +116,7 @@ watch(sort, (current, previous) => {
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
             >
-              {{ post.content }}
+              {{ post.excerpt }}
             </td>
             <td
               class="whitespace-no-wrap px-6 py-4 text-sm leading-5 text-gray-900 dark:text-gray-100"
@@ -129,8 +129,8 @@ watch(sort, (current, previous) => {
               <RouterLink
                 :to="{ name: 'posts.edit', params: { id: post.id } }"
                 class="hover:underline"
-                >{{ $t('Edit') }}</RouterLink
-              >
+                >{{ $t('Edit') }}
+              </RouterLink>
             </td>
           </tr>
         </tbody>

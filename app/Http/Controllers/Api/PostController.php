@@ -8,6 +8,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostController extends Controller
 {
@@ -51,6 +52,18 @@ class PostController extends Controller
         }
 
         $post = Post::create($request->validated());
+
+        return PostResource::make($post);
+    }
+
+    public function show(Post $post): JsonResource
+    {
+        return PostResource::make($post);
+    }
+
+    public function update(Post $post, StorePostRequest $request)
+    {
+        $post->update($request->validated());
 
         return PostResource::make($post);
     }
