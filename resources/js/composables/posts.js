@@ -1,5 +1,6 @@
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
+import { trans } from 'laravel-vue-i18n'
 
 export default function usePosts() {
   const posts = ref({})
@@ -7,6 +8,8 @@ export default function usePosts() {
   const router = useRouter()
   const validationErrors = ref({})
   const isLoading = ref(false)
+
+  const statusMessage = inject('status')
 
   const getPosts = async (page = 1, category = '', sort = '') => {
     try {
@@ -48,6 +51,8 @@ export default function usePosts() {
 
       await axios.post('/api/posts', serializedPost)
       router.push({ name: 'posts.index' })
+      statusMessage.type = 'success'
+      statusMessage.message = trans('Post saved successfully')
     } catch (error) {
       if (error.response?.data) {
         validationErrors.value = error.response.data.errors
@@ -64,6 +69,8 @@ export default function usePosts() {
       validationErrors.value = {}
       await axios.put('/api/posts/' + post.id, post)
       router.push({ name: 'posts.index' })
+      statusMessage.type = 'success'
+      statusMessage.message = trans('Post saved successfully')
     } catch (error) {
       if (error.response?.data) {
         validationErrors.value = error.response.data.errors
