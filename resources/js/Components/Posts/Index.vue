@@ -1,10 +1,8 @@
 <script setup>
-import { ref, onMounted, watch, inject } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import usePosts from '@/composables/posts'
 import useCategories from '@/composables/categories'
 import ColumnSort from '@/Components/ColumnSort.vue'
-import Modal from '@/Components/Modal.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { RouterLink } from 'vue-router'
 
 import { TailwindPagination } from 'laravel-vue-pagination'
@@ -12,15 +10,8 @@ import { TailwindPagination } from 'laravel-vue-pagination'
 const selectedCategory = ref('')
 const sort = ref('-created_at')
 
-const status = inject('status')
-
 const { posts, getPosts } = usePosts()
 const { categories, getCategories } = useCategories()
-
-const closeModal = () => {
-  status.type = ''
-  status.message = ''
-}
 
 onMounted(() => {
   getPosts()
@@ -155,56 +146,5 @@ watch(sort, (current, previous) => {
         :active-classes="['bg-blue-50', 'dark:bg-gray-700']"
       />
     </div>
-
-    <Modal :show="status.message !== ''" @close="closeModal" max-width="sm">
-      <div class="flex flex-col items-center p-6 align-middle">
-        <div class="mb-4" v-if="status.type === 'success'">
-          <span
-            class="m-2 inline-block scale-150 rounded-full border border-green-500 p-2 text-green-500"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
-          </span>
-        </div>
-        <div class="mb-4" v-else>
-          <span
-            class="m-2 inline-block scale-150 rounded-full border border-red-500 p-2 text-red-500"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
-          </span>
-        </div>
-        <h2 class="text-2xl font-medium text-gray-900 dark:text-gray-100">
-          {{ status.message }}
-        </h2>
-        <div class="mt-4">
-          <PrimaryButton @click="closeModal">OK</PrimaryButton>
-        </div>
-      </div>
-    </Modal>
   </div>
 </template>
