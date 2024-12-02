@@ -1,9 +1,9 @@
-import './bootstrap'
 import '../css/app.css'
+import './bootstrap'
 
-import { createApp } from 'vue'
-import { i18nVue } from 'laravel-vue-i18n'
 import App from '@/App.vue'
+import { i18nVue } from 'laravel-vue-i18n'
+import { createApp } from 'vue'
 
 import router from '@/routes'
 

@@ -1,14 +1,14 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
 import useCategories from '@/composables/categories'
 import usePosts from '@/composables/posts'
+import { onMounted, reactive } from 'vue'
 
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
+import PrimaryButton from '@/Components/PrimaryButton.vue'
+import SelectInput from '@/Components/SelectInput.vue'
 import TextInput from '@/Components/TextInput.vue'
 import TextareaInput from '@/Components/TextareaInput.vue'
-import SelectInput from '@/Components/SelectInput.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const { categories, getCategories } = useCategories()
 const { storePost, validationErrors, isLoading } = usePosts()

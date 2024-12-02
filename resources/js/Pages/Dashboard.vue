@@ -1,7 +1,7 @@
 <script setup>
+import { trans } from 'laravel-vue-i18n'
 import { ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import { trans } from 'laravel-vue-i18n'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 

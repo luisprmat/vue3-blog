@@ -1,15 +1,15 @@
 <script setup>
-import { onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import useCategories from '@/composables/categories'
 import usePosts from '@/composables/posts'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
+import PrimaryButton from '@/Components/PrimaryButton.vue'
+import SelectInput from '@/Components/SelectInput.vue'
 import TextInput from '@/Components/TextInput.vue'
 import TextareaInput from '@/Components/TextareaInput.vue'
-import SelectInput from '@/Components/SelectInput.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
 
 const { categories, getCategories } = useCategories()
 const { post, getPost, updatePost, validationErrors, isLoading } = usePosts()

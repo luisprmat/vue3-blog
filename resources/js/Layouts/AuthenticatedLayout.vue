@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import NavLink from '@/Components/NavLink.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
 const showingNavigationDropdown = ref(false)

@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import usePosts from '@/composables/posts'
-import useCategories from '@/composables/categories'
 import ColumnSort from '@/Components/ColumnSort.vue'
+import useCategories from '@/composables/categories'
+import usePosts from '@/composables/posts'
+import { onMounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import { TailwindPagination } from 'laravel-vue-pagination'
